@@ -25,7 +25,7 @@ func InMemHandler() Handlers {
 	return Handlers{root, root, root, root}
 }
 
-// Example Handlers
+// Fileread: Example Handlers
 func (fs *root) Fileread(r *Request) (io.ReaderAt, error) {
 	if fs.mockErr != nil {
 		return nil, fs.mockErr
@@ -116,7 +116,7 @@ func (fs *root) Filecmd(r *Request) error {
 
 type listerat []os.FileInfo
 
-// Modeled after strings.Reader's ReadAt() implementation
+// ListAt: Modeled after strings.Reader's ReadAt() implementation
 func (f listerat) ListAt(ls []os.FileInfo, offset int64) (int, error) {
 	var n int
 	if offset >= int64(len(f)) {
@@ -217,7 +217,7 @@ func newMemFile(name string, isdir bool) *memFile {
 	}
 }
 
-// Have memFile fulfill os.FileInfo interface
+// Name: Have memFile fulfill os.FileInfo interface
 func (f *memFile) Name() string { return filepath.Base(f.name) }
 func (f *memFile) Size() int64  { return int64(len(f.content)) }
 func (f *memFile) Mode() os.FileMode {
@@ -236,7 +236,7 @@ func (f *memFile) Sys() interface{} {
 	return fakeFileInfoSys()
 }
 
-// Read/Write
+// ReaderAt: Read/Write
 func (f *memFile) ReaderAt() (io.ReaderAt, error) {
 	if f.isdir {
 		return nil, os.ErrInvalid

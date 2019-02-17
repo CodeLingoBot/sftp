@@ -856,7 +856,7 @@ func (p *StatVFS) FreeSpace() uint64 {
 	return p.Frsize * p.Bfree
 }
 
-// Convert to ssh_FXP_EXTENDED_REPLY packet binary format
+// MarshalBinary: Convert to ssh_FXP_EXTENDED_REPLY packet binary format
 func (p *StatVFS) MarshalBinary() ([]byte, error) {
 	var buf bytes.Buffer
 	buf.Write([]byte{ssh_FXP_EXTENDED_REPLY})
